@@ -24,7 +24,6 @@ const album = document.querySelector('.album .row');
  * ----------------------------------------------------------------------------
  */
 const fetchData = async (type) => {
-   console.log("test fetchData");
 
    try {
       const resp = await fetch(api + type, authorization);
@@ -45,21 +44,22 @@ const createCard = async (elementi) => {
 
    if (elementi) {
 
-      const cards = document.querySelectorAll('.card');
+      // const cards = document.querySelectorAll('.card');
 
-      console.log(elementi)
+      // console.log(elementi)
 
       album.innerHTML = '';
 
-      for (let index = 0; index < cards.length; index++) {
+      for (const card of elementi.photos) {
+
+         console.log(card)
 
          const column = document.createElement('div');
          column.classList.add('col-md-4');
-         column.innerText = elementi.photos[index].alt;
 
          column.innerHTML = `
             <div class="card mb-4 shadow-sm">
-               <img src="${elementi.photos[index].src.landscape}" class="card-img-top img-fluid" alt="${elementi.photos[index].alt}">   
+               <img src="${card.src.landscape}" class="card-img-top img-fluid" alt="${card.alt}">   
                <div class="card-body">
                   <h5 class="card-title mt-auto">Lorem Ipsum</h5>
                   <p class="card-text">
@@ -76,7 +76,7 @@ const createCard = async (elementi) => {
                            Hide
                         </button>
                      </div>
-                     <small class="text-muted">ID: ${elementi.photos[index].id}</small>
+                     <small class="text-muted">ID: ${card.id}</small>
                   </div>
                </div>
             </div>
@@ -98,7 +98,7 @@ const createCard = async (elementi) => {
  * ----------------------------------------------------------------------------
  */
 window.onload = () => {
-   console.log('test onload')
+   // console.log('test onload')
 
    const formSearch = document.querySelector('#formSearch');
    const btnFirstLoad = document.querySelector('#btnFirstLoad');
@@ -114,11 +114,11 @@ window.onload = () => {
 
    formSearch.onsubmit = (event) => {
       event.preventDefault;
-      console.log('evento form stoppato');
 
       typePhotoSearch = formSearch.querySelector('input').value;
-      console.log(typePhotoSearch);
       fetchData(typePhotoSearch);
+      formSearch.reset();
+      // formSearch.querySelector('input').value = '';
    }
 
 }
