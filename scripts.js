@@ -113,11 +113,12 @@ window.onload = () => {
    }
 
    formSearch.onsubmit = (event) => {
-      event.preventDefault;
-
+      event.preventDefault();
+      
+      console.log('test');
       typePhotoSearch = formSearch.querySelector('input').value;
       fetchData(typePhotoSearch);
-      formSearch.reset();
+      // formSearch.reset();
       // formSearch.querySelector('input').value = '';
    }
 
